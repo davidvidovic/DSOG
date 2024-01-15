@@ -1,0 +1,294 @@
+
+*** Running vivado
+    with args -log FIR.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source FIR.tcl
+
+
+****** Vivado v2023.2 (64-bit)
+  **** SW Build 4029153 on Fri Oct 13 20:13:54 MDT 2023
+  **** IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+  **** SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source FIR.tcl -notrace
+create_project: Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1273.816 ; gain = 11.930 ; free physical = 7732 ; free virtual = 13349
+Command: read_checkpoint -auto_incremental -incremental /home/daconi/DSOG/FIR/FIR.srcs/utils_1/imports/synth_1/MAC.dcp
+INFO: [Vivado 12-5825] Read reference checkpoint from /home/daconi/DSOG/FIR/FIR.srcs/utils_1/imports/synth_1/MAC.dcp for incremental synthesis
+INFO: [Vivado 12-7989] Please ensure there are no constraint changes
+Command: synth_design -top FIR -part xc7z010clg400-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z010'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z010'
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 20943
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1698.312 ; gain = 409.652 ; free physical = 6987 ; free virtual = 12604
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'FIR' [/home/daconi/DSOG/FIR/FIR.srcs/sources_1/new/FIR.vhd:27]
+INFO: [Synth 8-638] synthesizing module 'MAC' [/home/daconi/DSOG/FIR/FIR.srcs/sources_1/new/MAC.vhd:18]
+	Parameter WIDTH_IN bound to: 16 - type: integer 
+	Parameter WIDTH_OUT bound to: 48 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'MAC' (0#1) [/home/daconi/DSOG/FIR/FIR.srcs/sources_1/new/MAC.vhd:18]
+INFO: [Synth 8-256] done synthesizing module 'FIR' (0#1) [/home/daconi/DSOG/FIR/FIR.srcs/sources_1/new/FIR.vhd:27]
+WARNING: [Synth 8-3848] Net ain_ready in module/entity FIR does not have driver. [/home/daconi/DSOG/FIR/FIR.srcs/sources_1/new/FIR.vhd:15]
+WARNING: [Synth 8-3848] Net aout_data in module/entity FIR does not have driver. [/home/daconi/DSOG/FIR/FIR.srcs/sources_1/new/FIR.vhd:20]
+WARNING: [Synth 8-3848] Net aout_valid in module/entity FIR does not have driver. [/home/daconi/DSOG/FIR/FIR.srcs/sources_1/new/FIR.vhd:22]
+WARNING: [Synth 8-3848] Net aout_last in module/entity FIR does not have driver. [/home/daconi/DSOG/FIR/FIR.srcs/sources_1/new/FIR.vhd:23]
+WARNING: [Synth 8-7129] Port ain_ready in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[47] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[46] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[45] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[44] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[43] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[42] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[41] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[40] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[39] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[38] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[37] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[36] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[35] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[34] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[33] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[32] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[31] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[30] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[29] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[28] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[27] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[26] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[25] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[24] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[23] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[22] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[21] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[20] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[19] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[18] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[17] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[16] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[15] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[14] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[13] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[12] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[11] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[10] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[9] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[8] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[7] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[6] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[5] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[4] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[3] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[2] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[1] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[0] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_valid in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_last in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ain_valid in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ain_last in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_ready in module FIR is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1773.281 ; gain = 484.621 ; free physical = 6891 ; free virtual = 12509
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1791.094 ; gain = 502.434 ; free physical = 6891 ; free virtual = 12509
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z010clg400-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1799.098 ; gain = 510.438 ; free physical = 6891 ; free virtual = 12509
+---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xc7z010clg400-1
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1808.004 ; gain = 519.344 ; free physical = 6882 ; free virtual = 12501
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Registers : 
+	               16 Bit    Registers := 1     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 80 (col length:40)
+BRAMs: 120 (col length: RAMB18 40 RAMB36 20)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+WARNING: [Synth 8-3330] design FIR has an empty top module
+WARNING: [Synth 8-7129] Port ain_ready in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[47] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[46] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[45] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[44] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[43] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[42] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[41] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[40] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[39] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[38] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[37] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[36] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[35] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[34] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[33] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[32] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[31] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[30] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[29] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[28] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[27] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[26] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[25] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[24] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[23] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[22] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[21] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[20] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[19] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[18] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[17] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[16] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[15] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[14] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[13] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[12] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[11] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[10] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[9] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[8] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[7] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[6] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[5] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[4] in module FIR is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aout_data[3] in module FIR is either unconnected or has no load
+INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 1911.566 ; gain = 622.906 ; free physical = 6781 ; free virtual = 12402
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 1911.566 ; gain = 622.906 ; free physical = 6777 ; free virtual = 12399
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 1911.566 ; gain = 622.906 ; free physical = 6773 ; free virtual = 12394
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1911.566 ; gain = 622.906 ; free physical = 6772 ; free virtual = 12394
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1911.566 ; gain = 622.906 ; free physical = 6772 ; free virtual = 12394
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1911.566 ; gain = 622.906 ; free physical = 6772 ; free virtual = 12394
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1911.566 ; gain = 622.906 ; free physical = 6772 ; free virtual = 12394
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1911.566 ; gain = 622.906 ; free physical = 6772 ; free virtual = 12394
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1911.566 ; gain = 622.906 ; free physical = 6772 ; free virtual = 12394
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+------+------+
+|      |Cell  |Count |
++------+------+------+
+|1     |OBUFT |    51|
++------+------+------+
+
+Report Instance Areas: 
++------+---------+-------+------+
+|      |Instance |Module |Cells |
++------+---------+-------+------+
+|1     |top      |       |    51|
++------+---------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1911.566 ; gain = 622.906 ; free physical = 6772 ; free virtual = 12394
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 132 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1911.566 ; gain = 622.906 ; free physical = 6772 ; free virtual = 12394
+Synthesis Optimization Complete : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1911.574 ; gain = 622.906 ; free physical = 6772 ; free virtual = 12394
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1917.504 ; gain = 0.000 ; free physical = 7096 ; free virtual = 12717
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2006.098 ; gain = 0.000 ; free physical = 7006 ; free virtual = 12628
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: 5fb1b5da
+INFO: [Common 17-83] Releasing license: Synthesis
+19 Infos, 106 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:17 ; elapsed = 00:00:15 . Memory (MB): peak = 2006.133 ; gain = 726.379 ; free physical = 7005 ; free virtual = 12627
+INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 1596.691; main = 1317.342; forked = 425.411
+INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 2942.234; main = 2006.102; forked = 1030.664
+Write ShapeDB Complete: Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 2030.109 ; gain = 0.000 ; free physical = 7005 ; free virtual = 12627
+INFO: [Common 17-1381] The checkpoint '/home/daconi/DSOG/FIR/FIR.runs/synth_1/FIR.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file FIR_utilization_synth.rpt -pb FIR_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Mon Jan 15 14:25:36 2024...
