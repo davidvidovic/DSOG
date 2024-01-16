@@ -4,7 +4,7 @@
 
 set TIME_start [clock seconds] 
 namespace eval ::optrace {
-  variable script "/home/daconi/DSOG/FIR/FIR.runs/synth_1/FIR.tcl"
+  variable script "/home/daconi/Documents/DSOG/FIR/FIR.runs/synth_1/FIR.tcl"
   variable category "vivado_synth"
 }
 
@@ -76,19 +76,20 @@ create_project -in_memory -part xc7z010clg400-1
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
-set_property webtalk.parent_dir /home/daconi/DSOG/FIR/FIR.cache/wt [current_project]
-set_property parent.project_path /home/daconi/DSOG/FIR/FIR.xpr [current_project]
+set_property webtalk.parent_dir /home/daconi/Documents/DSOG/FIR/FIR.cache/wt [current_project]
+set_property parent.project_path /home/daconi/Documents/DSOG/FIR/FIR.xpr [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language VHDL [current_project]
 set_property board_part_repo_paths {/home/daconi/.Xilinx/Vivado/2023.2/xhub/board_store/xilinx_board_store} [current_project]
 set_property board_part digilentinc.com:zybo:part0:1.0 [current_project]
-set_property ip_output_repo /home/daconi/DSOG/FIR/FIR.cache/ip [current_project]
+set_property ip_output_repo /home/daconi/Documents/DSOG/FIR/FIR.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_vhdl -library xil_defaultlib {
-  /home/daconi/DSOG/FIR/FIR.srcs/sources_1/new/MAC.vhd
-  /home/daconi/DSOG/FIR/FIR.srcs/sources_1/new/FIR.vhd
+  /home/daconi/Documents/DSOG/FIR/FIR.srcs/sources_1/new/util_pkg.vhd
+  /home/daconi/Documents/DSOG/FIR/FIR.srcs/sources_1/new/MAC.vhd
+  /home/daconi/Documents/DSOG/FIR/FIR.srcs/sources_1/new/FIR.vhd
 }
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
@@ -101,7 +102,7 @@ foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
 }
 set_param ips.enableIPCacheLiteLoad 1
 
-read_checkpoint -auto_incremental -incremental /home/daconi/DSOG/FIR/FIR.srcs/utils_1/imports/synth_1/MAC.dcp
+read_checkpoint -auto_incremental -incremental /home/daconi/Documents/DSOG/FIR/FIR.srcs/utils_1/imports/synth_1/MAC.dcp
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }

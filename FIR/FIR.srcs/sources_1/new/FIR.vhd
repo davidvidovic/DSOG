@@ -4,10 +4,10 @@ use IEEE.numeric_std.ALL;
 use work.util_pkg.all;
 
 entity FIR is
-    Generic ( WIDTH_IN        : natural := 16;
-              WIDTH_OUT       : natural := 48;
+    Generic ( WIDTH_IN        : natural := 12;
+              WIDTH_OUT       : natural := 24;
               FILTER_ORDER    : natural := 5;
-              N_MODULE        : natural := 11   
+              N_MODULE        : natural := 1   
              );
     Port (  clk : in std_logic;
             rst : in std_logic;
@@ -33,10 +33,10 @@ end FIR;
 
 architecture Behavioral of FIR is
 
-type std_2d is array (FILTER_ORDER-1 downto 0) of std_logic_vector(WIDTH_OUT-1 downto 0);
+type std_2d is array (FILTER_ORDER downto 0) of std_logic_vector(WIDTH_OUT-1 downto 0);
 signal mac_intern : std_2d := (others=>(others=>'0'));
 
-type coef_t is array (FILTER_ORDER-1 downto 0) of std_logic_vector(WIDTH_IN-1 downto 0);
+type coef_t is array (FILTER_ORDER downto 0) of std_logic_vector(WIDTH_IN-1 downto 0);
 signal b : coef_t := (others=>(others=>'0'));
 
 begin

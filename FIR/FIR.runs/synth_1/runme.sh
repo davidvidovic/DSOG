@@ -21,7 +21,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='/home/daconi/DSOG/FIR/FIR.runs/synth_1'
+HD_PWD='/home/daconi/Documents/DSOG/FIR/FIR.runs/synth_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log

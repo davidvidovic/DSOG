@@ -3,8 +3,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.numeric_std.ALL;
 
 entity MAC is
-    Generic ( WIDTH_IN        : natural := 16;
-              WIDTH_OUT       : natural := 48
+    Generic ( WIDTH_IN        : natural := 12;
+              WIDTH_OUT       : natural := 24
               );
     Port ( clk : in std_logic;
            rst : in std_logic;
@@ -51,7 +51,8 @@ b_next <= b_i;
 m_next <= std_logic_vector(signed(a_reg) * signed(b_reg));
 
 -- ALU, oba ulaza su WIDTH_OUT, izlaz je WIDTH_OUT+1 ???????
-p_next <= std_logic_vector(RESIZE(signed(m_reg), WIDTH_OUT) + signed(c_i));
+--p_next <= std_logic_vector(RESIZE(signed(m_reg), WIDTH_OUT) + signed(c_i));
+p_next <= std_logic_vector(signed(m_reg) + signed(c_i));
 
 -- Izlaz MACa je WIDTH_OUT
 y_o <= p_reg;

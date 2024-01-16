@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7z010clg400-1" LaunchTime="1705325108" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/MAC.dcp">
+<GenRun Id="synth_1" LaunchPart="xc7z010clg400-1" LaunchTime="1705421013" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/MAC.dcp">
   <File Type="VDS-TIMING-PB" Name="FIR_timing_summary_synth.pb"/>
   <File Type="VDS-TIMINGSUMMARY" Name="FIR_timing_summary_synth.rpt"/>
   <File Type="RDS-DCP" Name="FIR.dcp"/>
@@ -11,6 +11,12 @@
   <File Type="PA-TCL" Name="FIR.tcl"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
+    <File Path="$PSRCDIR/sources_1/new/util_pkg.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PSRCDIR/sources_1/new/MAC.vhd">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -50,9 +56,7 @@
     </Config>
   </FileSet>
   <Strategy Version="1" Minor="2">
-    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023">
-      <Desc>Vivado Synthesis Defaults</Desc>
-    </StratHandle>
+    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
     <Step Id="synth_design"/>
   </Strategy>
 </GenRun>
