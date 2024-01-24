@@ -59,7 +59,7 @@ begin
         --upis koeficijenata
         data_i_s <= (others=>'0');
         wait until falling_edge(clk_i_s);
-        for i in 0 to fir_ord loop
+        for i in 0 to fir_ord-1 loop
             we_i_s <= '1';
             coef_addr_i_s <= std_logic_vector(to_unsigned(i,log2c(fir_ord)));
             readline(input_coef,tv);

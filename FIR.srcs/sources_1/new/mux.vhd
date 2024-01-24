@@ -15,8 +15,8 @@ end mux;
 
 architecture Behavioral of mux is
 
-type temp_arr is array (natural range <>) of std_logic_vector(2*input_data_width-1 downto 0);
-signal mux_in : temp_arr(n_param downto 0);
+type temp_arr is array (n_param-1 downto 0) of std_logic_vector(2*input_data_width-1 downto 0);
+signal mux_in : temp_arr := (others=>(others=>'0'));
 
 begin
 
@@ -24,6 +24,6 @@ inputs: for i in 0 to n_param-1 generate
     mux_in(i) <= data_in(((i+1)*2*input_data_width)-1 downto (i*2*input_data_width));
 end generate;
 
-data_out <= mux_in(to_integer(unsigned(sel)));
+data_out <= mux_in(to_integer(unsigned(sel(log2c(n_param)-1 downto 0))));
 
 end Behavioral;

@@ -18,31 +18,31 @@ entity fir_param is
 end fir_param;
 
 architecture Behavioral of fir_param is
-    type std_2d is array (fir_ord downto 0) of std_logic_vector(2*input_data_width-1 downto 0);
+    type std_2d is array (fir_ord-1 downto 0) of std_logic_vector(2*input_data_width-1 downto 0);
     signal mac_inter : std_2d:=(others=>(others=>'0'));
-    type coef_t is array (fir_ord downto 0) of std_logic_vector(input_data_width-1 downto 0);
+    type coef_t is array (fir_ord-1 downto 0) of std_logic_vector(input_data_width-1 downto 0);
     signal b_s : coef_t := (others=>(others=>'0')); 
     
-    type fd_out_2d is array (n_param downto 0) of std_logic;
-    type fd_out_3d is array (fir_ord downto 0) of fd_out_2d;
+    type fd_out_2d is array (n_param-1 downto 0) of std_logic;
+    type fd_out_3d is array (fir_ord-1 downto 0) of fd_out_2d;
     signal fd_out : fd_out_3d := (others=>(others=>'0')); 
     
-    type mac_out_2d is array (n_param downto 0) of std_logic_vector(2*input_data_width-1 downto 0);
-    type mac_out_3d is array (fir_ord downto 0) of mac_out_2d;
+    type mac_out_2d is array (n_param-1 downto 0) of std_logic_vector(2*input_data_width-1 downto 0);
+    type mac_out_3d is array (fir_ord-1 downto 0) of mac_out_2d;
     signal mac_out : mac_out_3d := (others=> (others=> (others=>'0'))); 
    
-    type mux_in_2d is array (fir_ord downto 0) of std_logic_vector(n_param*2*input_data_width-1 downto 0);
+    type mux_in_2d is array (fir_ord-1 downto 0) of std_logic_vector(n_param*2*input_data_width-1 downto 0);
     signal mux_in : mux_in_2d := (others=>(others=>'0')); 
     
-    type sel_in_2d is array (fir_ord downto 0) of std_logic_vector(n_param-1 downto 0);
+    type sel_in_2d is array (fir_ord-1 downto 0) of std_logic_vector(n_param-1 downto 0);
     signal sel_in : sel_in_2d := (others=>(others=>'0')); 
     
     -- niz za izlaze muxova
-    type mux_out_2d is array (fir_ord downto 0) of std_logic_vector(2*input_data_width-1 downto 0);
+    type mux_out_2d is array (fir_ord-1 downto 0) of std_logic_vector(2*input_data_width-1 downto 0);
     signal mux_out_0, mux_out_1 : mux_out_2d := (others=>(others=>'0')); 
     
    
-    type comp_error_2d is array (fir_ord downto 0) of std_logic;
+    type comp_error_2d is array (fir_ord-1 downto 0) of std_logic;
     signal comp_error : comp_error_2d := (others => '0');
                                                                
 begin
@@ -56,12 +56,12 @@ begin
         end if;
     end process;
     
-    zero_mac_master: for n in 0 to n_param generate
+    zero_mac_master: for n in 0 to n_param-1 generate
         zero_mac: entity work.mac(behavioral)
             generic map(input_data_width=>input_data_width)
             port map(clk_i=>clk_i,
                      u_i=>data_i,
-                     b_i=>b_s(fir_ord),
+                     b_i=>b_s(fir_ord-1),
                      sec_i=>(others=>'0'),
                      sec_o=>mac_out(0)(n)
            );
@@ -71,15 +71,15 @@ begin
             port map(clk_i=>clk_i,
                      in1=>mac_out(0)(n),
                      data_i=>data_i,
-                     b_i=>b_s(fir_ord),
+                     b_i=>b_s(fir_ord-1),
                      sec_i=>(others=>'0'),
                      comp=>fd_out(0)(n)
             );
-    end generate;      
+    --end generate;      
     
-    concatenate_mac_out: for j in 0 to n_param-1 generate
-        mux_in(0)((j+1)*2*input_data_width - 1 downto j*2*input_data_width) <= mac_out(0)(j);
-        sel_in(0)(j) <= fd_out(0)(j);
+    --concatenate_mac_out: for j in 0 to n_param-1 generate
+        mux_in(0)((n+1)*2*input_data_width - 1 downto n*2*input_data_width) <= mac_out(0)(n);
+        sel_in(0)(n) <= fd_out(0)(n);
     end generate;
     
     switch_0: entity work.n_to_2_switch
@@ -104,25 +104,55 @@ begin
     -- ######################################################
 
     other_sections:
-    for i in 1 to fir_ord generate
-        --other_macs_master: for m in 1 to n_param generate
+    for i in 1 to fir_ord-1 generate
+        other_macs_master: for n in 0 to n_param-1 generate
                 other_macs: entity work.mac(behavioral)
                 generic map(input_data_width=>input_data_width)
                 port map(clk_i=>clk_i,
                          u_i=>data_i,
-                         b_i=>b_s(fir_ord-i),
+                         b_i=>b_s(fir_ord-i-1),
                          sec_i=>mac_inter(i-1),
-                         sec_o=>mac_inter(i));
-        --end generate;
+                         sec_o=>mac_out(i)(n));
+                         
+                 other_FD: entity work.fault_detection
+                    generic map(input_data_width=>input_data_width)
+                    port map(clk_i=>clk_i,
+                             in1=>mac_out(i)(n),
+                             data_i=>data_i,
+                             b_i=>b_s(fir_ord-i-1),
+                             sec_i=>mac_inter(i-1),
+                             comp=>fd_out(i)(n)
+                    );
+                    
+                    mux_in(i)((n+1)*2*input_data_width-1 downto n*2*input_data_width) <= mac_out(i)(n);
+                    sel_in(i)(n) <= fd_out(i)(n);
+        end generate;
+        
+        switch_i: entity work.n_to_2_switch
+            generic map (input_data_width=>input_data_width,
+                        n_param => n_param)
+            port map (  data_in => mux_in(i),
+                        sel => sel_in(i),
+                        error_signal => comp_error(i),
+                        data_out_0 => mux_out_0(i),
+                        data_out_1 => mux_out_1(i)
+            );
+     
+         comp_i: entity work.comp_unit
+                generic map(input_data_width=>input_data_width)
+                port map (  in_0 => mux_out_0(i),
+                            in_1 => mux_out_1(i),
+                            error_signal => comp_error(i));
+                            
+        
+        mac_inter(i) <= mux_out_0(i);
     end generate;
-    
-    --switches:
     
     
     process(clk_i)
     begin
         if(clk_i'event and clk_i='1')then
-            data_o <= mac_inter(fir_ord)(2*input_data_width-2 downto 2*input_data_width-output_data_width-1);
+            data_o <= mac_inter(fir_ord-1)(2*input_data_width-2 downto 2*input_data_width-output_data_width-1);
         end if;
     end process;
     

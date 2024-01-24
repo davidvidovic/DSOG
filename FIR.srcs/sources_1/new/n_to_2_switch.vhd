@@ -42,6 +42,6 @@ mux_1: entity work.mux
                         sel => sel_1,
                         data_out => data_out_1);                
 
-sel_1 <= std_logic_vector((unsigned(sel_0) + 1) + (error_signal & ""));
+sel_1 <= std_logic_vector((unsigned(sel_0) - 2) + (error_signal & ""));
 
 end Behavioral;
