@@ -11,6 +11,10 @@ entity priority_encoder is
            data_out : out STD_LOGIC_VECTOR (log2c(n_param)-1 downto 0)
            -- data_valid : out STD_LOGIC
            );
+    
+    attribute dont_touch : string;
+    attribute dont_touch of priority_encoder : entity is "yes";
+    
 end priority_encoder;
 
 architecture Behavioral of priority_encoder is

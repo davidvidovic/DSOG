@@ -13,6 +13,10 @@ entity n_to_2_switch is
            data_out_0 : out std_logic_vector(2*input_data_width-1 downto 0);
            data_out_1 : out std_logic_vector(2*input_data_width-1 downto 0)
     );
+    
+    attribute dont_touch : string;
+    attribute dont_touch of n_to_2_switch : entity is "yes";
+    
 end n_to_2_switch;
 
 architecture Behavioral of n_to_2_switch is

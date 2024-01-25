@@ -11,6 +11,10 @@ entity mux is
            data_out : out STD_LOGIC_VECTOR (2*input_data_width-1 downto 0);
            sel : in STD_LOGIC_VECTOR (log2c(n_param)-1 downto 0)
            );
+           
+    attribute dont_touch : string;
+    attribute dont_touch of mux : entity is "yes";
+    
 end mux;
 
 architecture Behavioral of mux is

@@ -9,6 +9,10 @@ entity fault_detection is
            b_i : in STD_LOGIC_VECTOR (input_data_width-1 downto 0);
            sec_i : in STD_LOGIC_VECTOR (2*input_data_width-1 downto 0);
            comp : out STD_LOGIC);
+           
+    --attribute dont_touch : string;
+    --attribute dont_touch of fault_detection : entity is "yes";
+    
 end fault_detection;
 
 architecture Behavioral of fault_detection is
