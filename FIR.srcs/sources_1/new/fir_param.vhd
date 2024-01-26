@@ -8,7 +8,7 @@ entity fir_param is
             input_data_width : natural := 24;
             output_data_width : natural := 24;
             -- Intrducing param N = for N-modular redundancy
-            n_param : natural := 4);
+            n_param : natural := 8);
     Port ( clk_i : in STD_LOGIC;
            we_i : in STD_LOGIC;
            coef_addr_i : std_logic_vector(log2c(fir_ord+1)-1 downto 0);

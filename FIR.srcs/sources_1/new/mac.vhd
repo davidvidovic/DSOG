@@ -11,8 +11,8 @@ entity mac is
            sec_i : in STD_LOGIC_VECTOR (2*input_data_width-1 downto 0);
            sec_o : out STD_LOGIC_VECTOR (2*input_data_width-1 downto 0));
            
-    --attribute dont_touch : string;
-    --attribute dont_touch of mac : entity is "yes";
+    attribute dont_touch : string;
+    attribute dont_touch of mac : entity is "yes";
     
 end mac;
 

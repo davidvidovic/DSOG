@@ -7,7 +7,11 @@ entity comp_unit is
     Port ( in_0 : in STD_LOGIC_VECTOR (2*input_data_width-1 downto 0);
            in_1 : in STD_LOGIC_VECTOR (2*input_data_width-1 downto 0);
            error_signal : out STD_LOGIC);
+           
+    attribute dont_touch : string;
+    attribute dont_touch of comp_unit : entity is "yes";
 end comp_unit;
+
 
 architecture Behavioral of comp_unit is
 
