@@ -22,11 +22,11 @@
 # # Uvećavanje vrednosti time_i za 400.
 # incr time_i 100
 #}
-add_force {/tb/uut_fir_filter/\other_sections(16)\/\other_macs_master(0)\/other_macs/sec_o} -radix hex {0 1000ns} -cancel_after 2000ns
-add_force {/tb/uut_fir_filter/\other_sections(16)\/\other_macs_master(1)\/other_macs/sec_o} -radix hex {0 1100ns} -cancel_after 2000ns
-add_force {/tb/uut_fir_filter/\other_sections(16)\/\other_macs_master(2)\/other_macs/sec_o} -radix hex {0 1200ns} -cancel_after 2000ns
-add_force {/tb/uut_fir_filter/\other_sections(16)\/\other_macs_master(3)\/other_macs/sec_o} -radix hex {0 1300ns} -cancel_after 2000ns
-add_force {/tb/uut_fir_filter/\other_sections(16)\/\other_macs_master(4)\/other_macs/sec_o} -radix hex {0 1400ns} -cancel_after 2000ns
-add_force {/tb/uut_fir_filter/\other_sections(16)\/\other_macs_master(5)\/other_macs/sec_o} -radix hex {0 1500ns} -cancel_after 2000ns
-add_force {/tb/uut_fir_filter/\other_sections(16)\/\other_macs_master(6)\/other_macs/sec_o} -radix hex {0 1600ns} -cancel_after 2000ns
-add_force {/tb/uut_fir_filter/\other_sections(16)\/\other_macs_master(7)\/other_macs/sec_o} -radix hex {0 1700ns} -cancel_after 2000ns
+add_force {/tb/uut_fir_filter/\other_sections(16)\/\other_macs_master(0)\/other_macs/sec_o} -radix hex {0 2000ns} -cancel_after 3000ns
+add_force {/tb/uut_fir_filter/\other_sections(16)\/\other_macs_master(1)\/other_macs/sec_o} -radix hex {0 2100ns} -cancel_after 3000ns
+add_force {/tb/uut_fir_filter/\other_sections(16)\/\other_macs_master(2)\/other_macs/sec_o} -radix hex {0 2200ns} -cancel_after 3000ns
+add_force {/tb/uut_fir_filter/\other_sections(16)\/\other_macs_master(3)\/other_macs/sec_o} -radix hex {0 2300ns} -cancel_after 3000ns
+add_force {/tb/uut_fir_filter/\other_sections(16)\/\other_macs_master(4)\/other_macs/sec_o} -radix hex {0 2400ns} -cancel_after 3000ns
+add_force {/tb/uut_fir_filter/\other_sections(16)\/\other_macs_master(5)\/other_macs/sec_o} -radix hex {0 2500ns} -cancel_after 3000ns
+add_force {/tb/uut_fir_filter/\other_sections(16)\/\other_macs_master(6)\/other_macs/sec_o} -radix hex {0 2600ns} -cancel_after 3000ns
+add_force {/tb/uut_fir_filter/\other_sections(16)\/\other_macs_master(7)\/other_macs/sec_o} -radix hex {0 2700ns} -cancel_after 3000ns

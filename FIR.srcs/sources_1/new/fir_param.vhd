@@ -64,9 +64,17 @@ architecture Behavioral of fir_param is
     type comp_error_2d is array (fir_ord-1 downto 0) of std_logic;
     signal comp_error : comp_error_2d := (others => '0');
     
+    type u_type is array (fir_ord*2 downto 0) of std_logic_vector(input_data_width-1 downto 0);
+    signal u_reg : u_type := (others=>(others=>'0')); 
+    
+    type valid_type is array (fir_ord*2 downto 0) of std_logic;
+    signal valid_reg : valid_type := (others=>'0');
+    
     
     signal cnt_coef_reg : std_logic_vector(log2c(fir_ord)-1 downto 0) := (others => '0');
-    signal cnt_init_clks : std_logic_vector(log2c(fir_ord)-1 downto 0) := (others => '0');
+    signal cnt_init_clks : std_logic_vector(log2c(fir_ord*2+3)-1 downto 0) := (others => '0');
+    --signal cnt_non_valid : std_logic_vector(log2c(fir_ord*3)-1 downto 0) := (others => '0');
+   -- signal enable_cnt_non_valid : std_logic := '0';
                                                                
 begin
     
@@ -84,7 +92,7 @@ begin
                 
                 -- count fir_ord clocks at the begging and only then say output data is valid
                 if((axi_valid_in = '1') and (cnt_coef_reg = std_logic_vector(to_unsigned(fir_ord, log2c(fir_ord))))) then
-                    if(cnt_init_clks < std_logic_vector(to_unsigned(fir_ord, log2c(fir_ord)))) then
+                    if(cnt_init_clks < std_logic_vector(to_unsigned(fir_ord*2+3, log2c(fir_ord*2+3)))) then
                         cnt_init_clks <= std_logic_vector(unsigned(cnt_init_clks) + 1);
                     else
                         cnt_init_clks <= cnt_init_clks;
@@ -101,12 +109,19 @@ begin
     
     process(cnt_init_clks)
     begin
-        if(unsigned(cnt_init_clks) = fir_ord) then
-            axi_valid_out <= '1';
+        if(unsigned(cnt_init_clks) = (fir_ord*2)+3) then
+            
+                axi_valid_out <= '1';
+            
         else
+           
             axi_valid_out <= '0';
         end if;
     end process;
+    
+   
+    
+    
     
     
     process(cnt_coef_reg)
@@ -118,6 +133,19 @@ begin
         end if;
     end process;
     
+    -- Pipeline input data and valid signal
+    process(clk_i)
+    begin
+        if(clk_i'event and clk_i = '1')then
+            u_reg(0) <= axi_data_in;
+            valid_reg(0) <= axi_valid_in;
+            u_regs: for i in 1 to 2*fir_ord loop
+                u_reg(i) <= u_reg(i-1);
+                valid_reg(i) <= valid_reg(i-1);
+            end loop;
+        end if;
+    end process;
+    
     
     -- ######################################################
 
@@ -126,20 +154,22 @@ begin
         zero_mac: entity work.mac(behavioral)
             generic map(input_data_width=>input_data_width)
             port map(clk_i=>clk_i,
-                     u_i=>axi_data_in,
+                     u_i=>u_reg(0),
                      b_i=>b_s(fir_ord-1),
                      sec_i=>(others=>'0'),
-                     sec_o=>mac_out(0)(n)
+                     sec_o=>mac_out(0)(n),
+                     axi_valid_in=>valid_reg(0)
            );
                      
         FD: entity work.fault_detection
             generic map(input_data_width=>input_data_width)
             port map(clk_i=>clk_i,
                      in1=>mac_out(0)(n),
-                     data_i=>axi_data_in,
+                     data_i=>u_reg(0),
                      b_i=>b_s(fir_ord-1),
                      sec_i=>(others=>'0'),
-                     comp=>fd_out(0)(n)
+                     comp=>fd_out(0)(n),
+                     axi_valid_in=>valid_reg(0)
             );
         mux_in(0)((n+1)*2*input_data_width - 1 downto n*2*input_data_width) <= mac_out(0)(n);
         sel_in(0)(n) <= fd_out(0)(n);
@@ -159,7 +189,8 @@ begin
             generic map(input_data_width=>input_data_width)
             port map (  in_0 => mux_out_0(0),
                         in_1 => mux_out_1(0),
-                        error_signal => comp_error(0));
+                        error_signal => comp_error(0),
+                        clk=>clk_i);
                         
     
     mac_inter(0) <= mux_out_0(0);
@@ -172,19 +203,22 @@ begin
                 other_macs: entity work.mac(behavioral)
                 generic map(input_data_width=>input_data_width)
                 port map(clk_i=>clk_i,
-                         u_i=>axi_data_in,
+                         u_i=>u_reg(i*2),
                          b_i=>b_s(fir_ord-i-1),
                          sec_i=>mac_inter(i-1),
-                         sec_o=>mac_out(i)(n));
+                         sec_o=>mac_out(i)(n),
+                         axi_valid_in=>valid_reg(i*2)
+                         );
                          
                  other_FD: entity work.fault_detection
                     generic map(input_data_width=>input_data_width)
                     port map(clk_i=>clk_i,
                              in1=>mac_out(i)(n),
-                             data_i=>axi_data_in,
+                             data_i=>u_reg(i*2),
                              b_i=>b_s(fir_ord-i-1),
                              sec_i=>mac_inter(i-1),
-                             comp=>fd_out(i)(n)
+                             comp=>fd_out(i)(n),
+                             axi_valid_in=>valid_reg(i*2)
                     );
                     
                     mux_in(i)((n+1)*2*input_data_width-1 downto n*2*input_data_width) <= mac_out(i)(n);
@@ -205,7 +239,8 @@ begin
                 generic map(input_data_width=>input_data_width)
                 port map (  in_0 => mux_out_0(i),
                             in_1 => mux_out_1(i),
-                            error_signal => comp_error(i));
+                            error_signal => comp_error(i),
+                            clk=>clk_i);
                             
         
         mac_inter(i) <= mux_out_0(i);

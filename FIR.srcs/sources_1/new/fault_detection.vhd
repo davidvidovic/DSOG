@@ -8,7 +8,8 @@ entity fault_detection is
            data_i : in STD_LOGIC_VECTOR (input_data_width-1 downto 0);
            b_i : in STD_LOGIC_VECTOR (input_data_width-1 downto 0);
            sec_i : in STD_LOGIC_VECTOR (2*input_data_width-1 downto 0);
-           comp : out STD_LOGIC);
+           comp : out STD_LOGIC;
+           axi_valid_in : in std_logic);
            
     --attribute dont_touch : string;
     --attribute dont_touch of fault_detection : entity is "yes";
@@ -27,7 +28,8 @@ FD_MAC: entity work.mac
              u_i=>data_i,
              b_i=>b_i,
              sec_i=>sec_i,
-             sec_o=>sec_o);
+             sec_o=>sec_o,
+             axi_valid_in=>axi_valid_in);
 
 process(in1, sec_o) begin
     if(in1 = sec_o) then

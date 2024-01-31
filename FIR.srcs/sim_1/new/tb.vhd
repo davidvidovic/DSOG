@@ -76,9 +76,10 @@ begin
     stim_process:
     process
         variable tv : line;
+        variable counter : integer := 0;
     begin
         --upis koeficijenata
-        axi_data_in_s <= (others=>'X');
+        axi_data_in_s <= (others=>'0');
         axi_valid_in_s <= '0';
         axi_last_in_s <= '0';
         
@@ -99,8 +100,21 @@ begin
             readline(input_test_vector,tv);
             axi_data_in_s <= to_std_logic_vector(string(tv));
             
+            -- Simulate valid droping to 0
+            if counter = 55 then
+                axi_valid_in_s <= '0';
+                axi_data_in_s <= (others => '0');
+            end if;
+            
             wait until falling_edge(clk_i_s);
-            start_check <= '1';
+            
+            if counter < (fir_ord*2) then
+                counter := counter + 1;
+            else
+                start_check <= '1';
+                counter := counter + 1;
+            end if;
+
         end loop;
         start_check <= '0';
         report "verification done!" severity failure;
@@ -110,14 +124,20 @@ begin
     process
         variable check_v : line;
         variable tmp : std_logic_vector(in_out_data_width-1 downto 0);
+        variable expected, calculated : integer;
     begin
         wait until start_check = '1';
         while(true)loop
-            wait until rising_edge(clk_i_s);
-            readline(output_check_vector,check_v);
-            tmp := to_std_logic_vector(string(check_v));
-            if(abs(signed(tmp) - signed(axi_data_out_s)) > "000000000000000000000111")then
-                --report "result mismatch!" severity failure;
+        wait until falling_edge(clk_i_s);
+            if axi_valid_in_s = '1' then   
+                readline(output_check_vector,check_v);
+                tmp := to_std_logic_vector(string(check_v));
+                if(abs(signed(tmp) - signed(axi_data_out_s)) > "000000000000000000000111")then
+                    expected := TO_INTEGER(signed(tmp));
+                    calculated := TO_INTEGER(signed(axi_data_out_s));
+                    report "Mismatch! Expected " & integer'image(expected) & " but calculated " & integer'image(calculated);
+                    --report "result mismatch!" severity failure;
+                end if;
             end if;
         end loop;
     end process;
