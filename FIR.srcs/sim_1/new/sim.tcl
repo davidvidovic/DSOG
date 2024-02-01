@@ -22,7 +22,7 @@
 # # Uvećavanje vrednosti time_i za 400.
 # incr time_i 100
 #}
-add_force {/tb/uut_fir_filter/\other_sections(16)\/\other_macs_master(0)\/other_macs/sec_o} -radix hex {0 2000ns} -cancel_after 3000ns
+add_force {/tb/uut_fir_filter/\other_sections(16)\/\other_macs_master(0)\/other_macs/sec_o} -radix hex {0 2020ns} -cancel_after 3000ns
 add_force {/tb/uut_fir_filter/\other_sections(16)\/\other_macs_master(1)\/other_macs/sec_o} -radix hex {0 2100ns} -cancel_after 3000ns
 add_force {/tb/uut_fir_filter/\other_sections(16)\/\other_macs_master(2)\/other_macs/sec_o} -radix hex {0 2200ns} -cancel_after 3000ns
 add_force {/tb/uut_fir_filter/\other_sections(16)\/\other_macs_master(3)\/other_macs/sec_o} -radix hex {0 2300ns} -cancel_after 3000ns

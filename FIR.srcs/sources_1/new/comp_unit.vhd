@@ -19,10 +19,12 @@ architecture Behavioral of comp_unit is
 begin
 
 process(clk) begin
-    if(in_0 = in_1) then
-        error_signal <= '1';
-    else
-        error_signal <= '0';
+    if rising_edge(clk) then
+        if(in_0 = in_1) then
+            error_signal <= '1';
+        else
+            error_signal <= '0';
+        end if;
     end if;
 end process;
 

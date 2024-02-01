@@ -95,15 +95,16 @@ begin
         end loop;
         --ulaz za filtriranje
         while not endfile(input_test_vector) loop
-            axi_valid_in_s <= '1';
             
-            readline(input_test_vector,tv);
-            axi_data_in_s <= to_std_logic_vector(string(tv));
             
-            -- Simulate valid droping to 0
-            if counter = 55 then
+            --Simulate valid droping to 0
+            if counter = 35 then
                 axi_valid_in_s <= '0';
                 axi_data_in_s <= (others => '0');
+            else
+                axi_valid_in_s <= '1';
+                readline(input_test_vector,tv);
+                axi_data_in_s <= to_std_logic_vector(string(tv));
             end if;
             
             wait until falling_edge(clk_i_s);
@@ -129,7 +130,7 @@ begin
         wait until start_check = '1';
         while(true)loop
         wait until falling_edge(clk_i_s);
-            if axi_valid_in_s = '1' then   
+            if axi_valid_out_s = '1' then   
                 readline(output_check_vector,check_v);
                 tmp := to_std_logic_vector(string(check_v));
                 if(abs(signed(tmp) - signed(axi_data_out_s)) > "000000000000000000000111")then
